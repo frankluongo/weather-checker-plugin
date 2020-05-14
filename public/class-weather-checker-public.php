@@ -1,5 +1,11 @@
 <?php
 
+function console_log( $data ){
+  echo '<script>';
+  echo 'console.log('. json_encode( $data ) .')';
+  echo '</script>';
+}
+
 class Weather_Checker_Public {
 	private $plugin_name;
   private $version;
@@ -7,6 +13,7 @@ class Weather_Checker_Public {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
+    $this->selected_days = intval(get_option('forecast_days')) || 5;
     add_shortcode('weather_checker', array($this, 'public_content'));
     add_action('woocommerce_cart_calculate_fees', array($this, 'check_for_temperature_fee') );
 	}
@@ -55,8 +62,8 @@ class Weather_Checker_Public {
       return;
     }
 
-    $five_days = $this->get_first_five_days($response->list);
-    $average_temp = $this->get_average_temp($five_days);
+    $days = $this->get_day_forecasts($response->list);
+    $average_temp = $this->get_average_temp($days);
 
     if ( $average_temp > $temp_threshold ) :
       $woocommerce->cart->add_fee( $fee_name, $fee, true, 'standard' );
@@ -72,9 +79,9 @@ class Weather_Checker_Public {
     }
   }
 
-  public function get_first_five_days($list) {
-    $five_days = array_slice($list, 0, 5);
-    $temps = array_map(array($this, 'get_day_temp'), $five_days);
+  public function get_day_forecasts($list) {
+    $number_of_days = array_slice($list, 0, $this->selected_days);
+    $temps = array_map(array($this, 'get_day_temp'), $number_of_days);
     return $temps;
   }
 
@@ -84,7 +91,7 @@ class Weather_Checker_Public {
 
   public function get_average_temp($days) {
     $sum = array_sum($days);
-    $avg = $sum / 5;
+    $avg = $sum / $this->selected_days;
     $avgInFahrenheit = $this->convert_kelvin_to_fahrenheit($avg);
     return $avgInFahrenheit;
   }

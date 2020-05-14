@@ -16,7 +16,7 @@
  * Plugin Name:       Weather Checker
  * Plugin URI:        frankluongo.com
  * Description:       This Plugin Checks the weather to determine if a shipping fee is required
- * Version:           1.0.3
+ * Version:           1.1.0
  * Author:            Frank Luongo
  * Author URI:        frankluongo.com
  * License:           GPL-2.0+

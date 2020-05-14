@@ -16,6 +16,7 @@ class Weather_Checker_Admin {
     $this->admin_plugin_temperature_threshold = 'temperature_threshold';
     $this->admin_plugin_fee_amount = 'fee_amount';
     $this->admin_plugin_fee_name = 'fee_name';
+    $this->admin_plugin_forecast_days = 'forecast_days';
 
     // Add Weather Checker To Admin Menu
     add_action('admin_menu', array($this, 'add_weather_checker_to_admin_menu'));
@@ -71,6 +72,11 @@ class Weather_Checker_Admin {
       $this->admin_plugin_page_slug,
       $this->admin_plugin_fee_name
     );
+
+    register_setting(
+      $this->admin_plugin_page_slug,
+      $this->admin_plugin_forecast_days
+    );
   }
 
   public function add_weather_checker_setting_fields() {
@@ -109,7 +115,7 @@ class Weather_Checker_Admin {
     add_settings_field(
       'weather-checker-forecast-days', // ID For Setting
       '# Of Forecast Days', // Field Title
-      array($this, 'render_fee_name'), // Callback Function to Render the Form
+      array($this, 'render_forecast_days'), // Callback Function to Render the Form
       $this->admin_plugin_page_slug, // Page The Setting Shows Up On
       $this->admin_weather_checker_setting_section // The Section the Setting Shows Up On
     );
@@ -142,6 +148,13 @@ class Weather_Checker_Admin {
     $fee_name = esc_attr(get_option($this->admin_plugin_fee_name, ''));
     ?>
     <input id="fee-name" type="text" name="<?php echo $this->admin_plugin_fee_name; ?>" placeholder="Fee Name" value="<?php echo $fee_name; ?>">
+    <?php
+  }
+
+  public function render_forecast_days() {
+    $forecast_days = esc_attr(get_option($this->admin_plugin_forecast_days, ''));
+    ?>
+    <input id="forecast-days" type="number" name="<?php echo $this->admin_plugin_forecast_days; ?>" placeholder="# Forecast Days" value="<?php echo $forecast_days; ?>">
     <?php
   }
 
