@@ -1,0 +1,102 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+.weather-checker__notification {
+  z-index: 9999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+.weather-checker__notification[data-active="true"] {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.weather-checker-notification__close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+
+  background-color: transparent;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  transition: all 150ms ease-in-out;
+}
+
+.weather-checker-notification__close-button:hover {
+  background-color: #b33a3a;
+}
+
+.weather-checker-notification-close-button__bar {
+  position: absolute;
+  left: 7px;
+  top: 14px;
+
+  width: 16px;
+  height: 2px;
+
+  background-color: #999;
+  transition: all 150ms ease-in-out;
+}
+
+.weather-checker-notification__close-button:hover
+  .weather-checker-notification-close-button__bar {
+  background-color: #fff;
+}
+
+.weather-checker-notification-close-button__bar.bar-1 {
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.weather-checker-notification-close-button__bar.bar-2 {
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.weather-checker-notification__container {
+  position: relative;
+
+  width: 90%;
+  max-width: 640px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+@media all and (min-width: 640px) {
+  .weather-checker-notification__container {
+    padding: 32px;
+  }
+
+  .weather-checker-notification__close-button {
+    top: 16px;
+    right: 16px;
+  }
+}
