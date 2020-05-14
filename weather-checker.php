@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WEATHER_CHECKER_VERSION', '1.0.1' );
+define( 'WEATHER_CHECKER_VERSION', '1.1.0' );
 
 function activate_weather_checker() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-weather-checker-activator.php';
