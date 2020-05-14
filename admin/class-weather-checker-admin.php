@@ -105,6 +105,14 @@ class Weather_Checker_Admin {
       $this->admin_plugin_page_slug, // Page The Setting Shows Up On
       $this->admin_weather_checker_setting_section // The Section the Setting Shows Up On
     );
+
+    add_settings_field(
+      'weather-checker-forecast-days', // ID For Setting
+      '# Of Forecast Days', // Field Title
+      array($this, 'render_fee_name'), // Callback Function to Render the Form
+      $this->admin_plugin_page_slug, // Page The Setting Shows Up On
+      $this->admin_weather_checker_setting_section // The Section the Setting Shows Up On
+    );
   }
 
 
